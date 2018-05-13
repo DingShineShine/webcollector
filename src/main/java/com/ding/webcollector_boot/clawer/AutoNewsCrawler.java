@@ -42,7 +42,9 @@ public class AutoNewsCrawler extends BreadthCrawler {
         if (page.matchUrl("http://news.hfut.edu.cn/show-.*html")) {
 
             /*extract title and content of news by css selector*/
-            String title = page.select("div[id=Article]>h2").first().text();
+//            String title = page.select("div[id=Article]>h2").first().text();
+            String title = page.select(" #Article > h2:nth-child(1)").first().text();
+
             String content = page.selectText("div#artibody");
 
             System.out.println("URL:\n" + url);
