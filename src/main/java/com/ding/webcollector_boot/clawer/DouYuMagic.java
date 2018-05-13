@@ -1,21 +1,15 @@
 package com.ding.webcollector_boot.clawer;
 
 import com.ding.webcollector_boot.dao.DouyuResultDao;
-import com.ding.webcollector_boot.domain.DouyuResult;
+import com.ding.webcollector_boot.domain.DouYuResult;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
-import us.codecraft.webmagic.Spider;
-import us.codecraft.webmagic.pipeline.ConsolePipeline;
 import us.codecraft.webmagic.processor.PageProcessor;
 import us.codecraft.webmagic.selector.Html;
-import us.codecraft.webmagic.selector.Selectable;
 
-import javax.persistence.Column;
-import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -33,6 +27,14 @@ public class DouYuMagic implements PageProcessor {
     @Override
     public void process(Page page) {
         try {
+            /*第二种写法*/
+           /* List<String> gameTypeList = page.getHtml().css("#live-list-content").links().all();
+            for (String gameDetail : gameTypeList){
+                Html html = new Html(gameDetail);
+                String s = html.css("#live-list-contentbox > li:nth-child(\" + i + \") > a:nth-child(1) > div:nth-child(2) > p:nth-child(2) > span:nth-child(1)").get();
+                System.out.println(s);
+            }*/
+
             if(page.getUrl().get().equalsIgnoreCase("https://www.douyu.com/directory")){
                 List<String> gameTypeList = page.getHtml().css("#live-list-content").links().all();
                 page.addTargetRequests(gameTypeList);
@@ -61,7 +63,8 @@ public class DouYuMagic implements PageProcessor {
                             String hot = page.getHtml().css(cssHot).get();
                             String keyWord = page.getHtml().css(cssKeyWord).get();
                             String picUrl = page.getHtml().css(cssPicUrl).get();
-                            douyuResultDao.save(new DouyuResult(null, player, title, hot, gameType, keyWord, picUrl));
+                            DouYuResult douYuResult = new DouYuResult(null, player, title, hot, gameType, keyWord, picUrl);
+                            douyuResultDao.save(douYuResult);
                         }
                     }
                 }

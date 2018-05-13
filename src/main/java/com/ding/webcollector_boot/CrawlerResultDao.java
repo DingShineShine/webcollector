@@ -1,6 +1,6 @@
 package com.ding.webcollector_boot;
 
-import com.ding.webcollector_boot.domain.DouyuResult;
+import com.ding.webcollector_boot.domain.DouYuResult;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -8,5 +8,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @create 2018/5/10
  * @description :
  */
-public interface CrawlerResultDao extends JpaRepository<DouyuResult,Integer> {
+public interface CrawlerResultDao extends JpaRepository<DouYuResult,Integer> {
 }

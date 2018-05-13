@@ -1,6 +1,7 @@
 package com.ding.webcollector_boot;
 
 import org.junit.Test;
+import us.codecraft.webmagic.selector.Html;
 
 import java.util.Random;
 
@@ -20,5 +21,10 @@ public class TestOne {
         for (int i = 0; i <20; i++){
             System.out.println(i);
         }
+    }
+    @Test
+    public void test3(){
+        Html html = new Html("www.baidu.com");
+        System.out.println(html);
     }
 }
