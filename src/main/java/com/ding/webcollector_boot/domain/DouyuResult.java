@@ -11,24 +11,27 @@ import javax.persistence.*;
  * @create 2018/5/10
  * @description :
  */
-@Table(name = "crawler_result_page")
+@Table(name = "douyu_result")
 @Data
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class CrawlerResultPage {
+public class DouyuResult {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Column(name = "player")
+    private String player;
     @Column(name = "title")
     private String title;
-    @Column(name = "content")
-    private String content;
-    @Column(name = "image_url")
-    private String imageUrl;
-    @Column(name = "page_url")
-    private String pageUrl;
-    @Column(name = "viewer_number")
-    private String viewerNumber;
+    @Column(name = "hot")
+    private String hot;
+    @Column(name = "gameType")
+    private String gameType;
+    @Column(name = "keyWord")
+    private String keyWord;
+    @Column(name = "picUrl")
+    private String picUrl;
+
 }

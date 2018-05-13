@@ -1,17 +1,10 @@
 package com.ding.webcollector_boot.clawer;
 
-import org.springframework.remoting.soap.SoapFaultException;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
-import us.codecraft.webmagic.model.ConsolePageModelPipeline;
 import us.codecraft.webmagic.pipeline.ConsolePipeline;
-import us.codecraft.webmagic.pipeline.Pipeline;
 import us.codecraft.webmagic.processor.PageProcessor;
-import us.codecraft.webmagic.processor.example.GithubRepoPageProcessor;
-import us.codecraft.webmagic.selector.Selectable;
-
-import java.util.List;
 
 /**
  * @author ding
@@ -28,34 +21,29 @@ public class QiubaiMagic implements PageProcessor {
 
     @Override
     public void process(Page page) {
-
-        if(page.getHtml().links().regex(LIST_URL).match()){
-
-        }else{
-            page.putField("content",page.getHtml().css(".content").get());
+        try {
+            if(page.getUrl().regex(LIST_URL).match()){
+                page.addTargetRequests(page.getHtml().links().regex(LIST_URL).all());
+            }else if(page.getUrl().regex(CONTENT_URL).match()){
+                page.putField("content",page.getHtml().css(".content").get());
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
-
-
-        page.addTargetRequests(page.getHtml().links().regex("https://www.qiushibaike.com/article/\\d+").all());
-        page.addTargetRequests(page.getHtml().links().regex("https://www.qiushibaike.com/8hr/page/\\d+\\/)").all());
-        String url = "https://www.qiushibaike.com/article/\\d+";
-        page.putField("content", page.getHtml().css(".content").get());
-        String s = page.getHtml().xpath("/html/body/div[2]/div/div[1]/div[1]/a/div/span[1]").get();
-        System.out.println(s);
-        System.out.println(page);
-        String content = page.getHtml().css(".content").get();
-        System.out.println(content);
-
     }
 
     @Override
     public Site getSite() {
-        return Site.me().setDomain("www.qiushibaike.com").addCookie("__cur_art_index", ".qiushibaike.com")
-                .addCookie("_xsrf", "www.qiushibaike.com").setCharset("Utf-8").setTimeOut(3000).setSleepTime(1000);
+        return Site.me()
+                .setDomain("www.qiushibaike.com")
+                .addCookie("_xsrf", "www.qiushibaike.com")
+                .addCookie("__cur_art_index", ".qiushibaike.com")
+                .setUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:59.0) Gecko/20100101 Firefox/59.0")
+                .setCharset("Utf-8").setTimeOut(3000).setSleepTime(1000);
     }
 
     public static void main(String[] args) {
-        Spider.create(new GithubRepoPageProcessor()).addUrl("https://www.qiushibaike.com/")
+        Spider.create(new QiubaiMagic()).addUrl("https://www.qiushibaike.com/")
                 .addPipeline(new ConsolePipeline()).thread(5).run();
 
     }

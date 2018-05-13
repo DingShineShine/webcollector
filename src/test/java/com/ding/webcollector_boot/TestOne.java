@@ -14,4 +14,11 @@ public class TestOne {
     public void testone(){
         System.out.println(new Random().nextInt());
     }
+
+    @Test
+    public void test2(){
+        for (int i = 0; i <20; i++){
+            System.out.println(i);
+        }
+    }
 }
