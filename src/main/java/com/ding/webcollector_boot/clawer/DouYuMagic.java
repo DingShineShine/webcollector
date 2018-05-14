@@ -25,6 +25,8 @@ import java.util.List;
 public class DouYuMagic implements PageProcessor {
     private static final String DETAIL_LIST_URL = "https://www.douyu.com/directory/game/\\w+";
 
+    @Autowired
+    private DouYuPipeline douYuPipeline;
     @Override
     public void process(Page page) {
         try {
@@ -69,7 +71,7 @@ public class DouYuMagic implements PageProcessor {
     public void run() {
         try {
             log.info("斗鱼爬虫启动");
-            Spider.create(new DouYuMagic()).addPipeline(new ConsolePipeline()).thread(50).addUrl("https://www.douyu.com/directory").run();
+            Spider.create(new DouYuMagic()).addPipeline(douYuPipeline).thread(50).addUrl("https://www.douyu.com/directory").run();
         }catch (Exception e){
             e.printStackTrace();
         }
