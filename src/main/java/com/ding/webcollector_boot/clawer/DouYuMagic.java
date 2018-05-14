@@ -24,14 +24,17 @@ import java.util.List;
 @Slf4j
 public class DouYuMagic implements PageProcessor {
     private static final String DETAIL_LIST_URL = "https://www.douyu.com/directory/game/\\w+";
+    private static final String MAIN_PAGE = "https://www.douyu.com/directory";
 
     @Autowired
     private DouYuPipeline douYuPipeline;
     @Override
     public void process(Page page) {
         try {
-            List<String> gameTypeList = page.getHtml().css("#live-list-content").links().all();
-            page.addTargetRequests(gameTypeList);
+            if(page.getUrl().regex(MAIN_PAGE).match()){
+                List<String> gameTypeList = page.getHtml().css("#live-list-content").links().all();
+                page.addTargetRequests(gameTypeList);
+            }
             if(page.getUrl().regex(DETAIL_LIST_URL).match()){
                 String gameType = page.getHtml().css(".listcustomize-topcon-msg > h1:nth-child(1)").get();
                 List<String> gameDetails = page.getHtml().css("#live-list-contentbox").links().all();
