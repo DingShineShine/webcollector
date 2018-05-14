@@ -1,11 +1,9 @@
 package com.ding.webcollector_boot;
 
 import com.ding.webcollector_boot.clawer.DouYuMagic;
-import com.ding.webcollector_boot.pipline.DouYuPipeline;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-import us.codecraft.webmagic.Spider;
 
 /**
  * @author Ding

@@ -3,7 +3,6 @@ package com.ding.webcollector_boot.pipline;
 import com.ding.webcollector_boot.dao.DouyuResultDao;
 import com.ding.webcollector_boot.domain.DouYuResult;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import us.codecraft.webmagic.ResultItems;
 import us.codecraft.webmagic.Task;
@@ -17,7 +16,7 @@ import us.codecraft.webmagic.pipeline.Pipeline;
 @Component
 public class DouYuPipeline implements Pipeline {
     @Autowired
-    private DouyuResultDao douyuResultDao;
+    private  DouyuResultDao douyuResultDao;
 
     @Override
     public void process(ResultItems resultItems, Task task) {
