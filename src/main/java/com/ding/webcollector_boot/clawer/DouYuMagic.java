@@ -31,7 +31,7 @@ public class DouYuMagic implements PageProcessor {
     @Override
     public void process(Page page) {
         try {
-            if(page.getUrl().regex(MAIN_PAGE).match()){
+            if(page.getUrl().get().equalsIgnoreCase(MAIN_PAGE)){
                 List<String> gameTypeList = page.getHtml().css("#live-list-content").links().all();
                 page.addTargetRequests(gameTypeList);
             }
