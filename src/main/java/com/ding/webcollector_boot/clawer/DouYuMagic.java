@@ -21,28 +21,15 @@ import java.util.List;
 @Slf4j
 public class DouYuMagic implements PageProcessor {
     private static final String DETAIL_LIST_URL = "https://www.douyu.com/directory/game/\\w+";
-    @Autowired
-    private DouyuResultDao douyuResultDao;
 
     @Override
     public void process(Page page) {
         try {
-            /*第二种写法*/
-           /* List<String> gameTypeList = page.getHtml().css("#live-list-content").links().all();
-            for (String gameDetail : gameTypeList){
-                Html html = new Html(gameDetail);
-                String s = html.css("#live-list-contentbox > li:nth-child(\" + i + \") > a:nth-child(1) > div:nth-child(2) > p:nth-child(2) > span:nth-child(1)").get();
-                System.out.println(s);
-            }*/
-
-            if(page.getUrl().get().equalsIgnoreCase("https://www.douyu.com/directory")){
-                List<String> gameTypeList = page.getHtml().css("#live-list-content").links().all();
-                page.addTargetRequests(gameTypeList);
-            }
-            if (page.getUrl().regex(DETAIL_LIST_URL).match()) {
+            List<String> gameTypeList = page.getHtml().css("#live-list-content").links().all();
+            page.addTargetRequests(gameTypeList);
+            if(page.getUrl().regex(DETAIL_LIST_URL).match()){
                 String gameType = page.getHtml().css(".listcustomize-topcon-msg > h1:nth-child(1)").get();
                 List<String> gameDetails = page.getHtml().css("#live-list-contentbox").links().all();
-                log.info(page.getUrl().get());
                 if (gameDetails.size() >= 50) {
                     for (int i = 0; i < 50; i++) {
                         String cssPlayer = "#live-list-contentbox > li:nth-child(" + i + ") > a:nth-child(1) > div:nth-child(2) > p:nth-child(2) > span:nth-child(1)";
@@ -50,13 +37,6 @@ public class DouYuMagic implements PageProcessor {
                         String cssHot = "#live-list-contentbox > li:nth-child(" + i + ") > a:nth-child(1) > div:nth-child(2) > p:nth-child(2) > span:nth-child(2)";
                         String cssKeyWord = "#live-list-contentbox > li:nth-child(" + i + ") > a:nth-child(1) > div:nth-child(3)";
                         String cssPicUrl = "#live-list-contentbox > li:nth-child(" + i + ") > a:nth-child(1) > span:nth-child(1) > img:nth-child(4)";
-                    /*是否利用webmagic的存储,待考虑
-                    page.putField("player", page.getHtml().css(cssPlayer).get());
-                    page.putField("title",page.getHtml().css(cssTitle).get());
-                    page.putField("hot",page.getHtml().css(cssHot).get());
-                    page.putField("keyWord",page.getHtml().css(cssKeyWord).get());
-                    page.putField("picUrl",page.getHtml().css(cssPicUrl).get());
-                        page.putField(gameType, gameType);*/
                         String player = page.getHtml().css(cssPlayer).get();
                         String title = page.getHtml().css(cssTitle).get();
                         if (player != null && title != null) {
@@ -64,7 +44,7 @@ public class DouYuMagic implements PageProcessor {
                             String keyWord = page.getHtml().css(cssKeyWord).get();
                             String picUrl = page.getHtml().css(cssPicUrl).get();
                             DouYuResult douYuResult = new DouYuResult(null, player, title, hot, gameType, keyWord, picUrl);
-                            douyuResultDao.save(douYuResult);
+                            page.putField("douYuResult",douYuResult);
                         }
                     }
                 }

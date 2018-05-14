@@ -10,3 +10,5 @@ spring:
           ddl-auto: update
         database-platform: org.hibernate.dialect.MySQL5Dialect
     spring.jpa.properties.hibernate.format_sql: true
+crawler:
+  fosun: 123

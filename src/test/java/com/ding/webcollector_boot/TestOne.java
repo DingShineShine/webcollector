@@ -27,4 +27,10 @@ public class TestOne {
         Html html = new Html("www.baidu.com");
         System.out.println(html);
     }
+
+    @Test
+    public void test4(){
+        Html html = new Html("https://www.douyu.com/directory/game/LRSZQ");
+        System.out.println(html);
+    }
 }
