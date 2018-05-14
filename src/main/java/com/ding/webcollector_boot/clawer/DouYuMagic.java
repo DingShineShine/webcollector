@@ -2,11 +2,14 @@ package com.ding.webcollector_boot.clawer;
 
 import com.ding.webcollector_boot.dao.DouyuResultDao;
 import com.ding.webcollector_boot.domain.DouYuResult;
+import com.ding.webcollector_boot.pipline.DouYuPipeline;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
+import us.codecraft.webmagic.Spider;
+import us.codecraft.webmagic.pipeline.ConsolePipeline;
 import us.codecraft.webmagic.processor.PageProcessor;
 import us.codecraft.webmagic.selector.Html;
 
@@ -21,7 +24,8 @@ import java.util.List;
 @Slf4j
 public class DouYuMagic implements PageProcessor {
     private static final String DETAIL_LIST_URL = "https://www.douyu.com/directory/game/\\w+";
-
+    @Autowired
+    private DouyuResultDao douyuResultDao;
     @Override
     public void process(Page page) {
         try {
@@ -45,6 +49,7 @@ public class DouYuMagic implements PageProcessor {
                             String picUrl = page.getHtml().css(cssPicUrl).get();
                             DouYuResult douYuResult = new DouYuResult(null, player, title, hot, gameType, keyWord, picUrl);
                             page.putField("douYuResult",douYuResult);
+                            douyuResultDao.save(douYuResult);
                         }
                     }
                 }
@@ -63,8 +68,15 @@ public class DouYuMagic implements PageProcessor {
     }
 
 
-    /*public static void main(String[] args) {
-        Spider.create(new DouYuMagic()).addPipeline(new ConsolePipeline()).thread(50).addUrl("https://www.douyu.com/directory").run();
-    }*/
+    public void run() {
+        try {
+            log.info("斗鱼爬虫启动");
+            Spider.create(new DouYuMagic()).thread(50).addUrl("https://www.douyu.com/directory").run();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+    }
 
 }
