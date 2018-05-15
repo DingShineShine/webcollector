@@ -44,4 +44,13 @@ public class TestOne {
         System.out.println(links);
         System.out.println(match);
     }
+
+    @Test
+    public void test6(){
+        String s = "https://www.douyu.com/directory/game/\\w+";
+        int i = s.lastIndexOf(".com/")+5;
+
+        String substring = s.substring(0, i);
+        System.out.println(substring);
+    }
 }
