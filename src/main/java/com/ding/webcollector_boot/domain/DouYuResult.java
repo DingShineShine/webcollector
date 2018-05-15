@@ -23,15 +23,17 @@ public class DouYuResult {
     private Integer id;
     @Column(name = "player")
     private String player;
-    @Column(name = "title",length = 1000)
+    @Column(name = "title")
     private String title;
     @Column(name = "hot")
     private String hot;
     @Column(name = "gameType")
     private String gameType;
-    @Column(name = "keyWord",length = 1000)
+    @Column(name = "keyWord")
     private String keyWord;
-    @Column(name = "picUrl",length = 1000)
+    @Column(name = "picUrl")
     private String picUrl;
+    @Column(name = "liveUrl")
+    private String liveUrl;
 
 }

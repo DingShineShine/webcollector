@@ -8,6 +8,8 @@ import us.codecraft.webmagic.ResultItems;
 import us.codecraft.webmagic.Task;
 import us.codecraft.webmagic.pipeline.Pipeline;
 
+import java.util.List;
+
 /**
  * @author Ding
  * @create 2018/5/14
@@ -20,9 +22,9 @@ public class DouYuPipeline implements Pipeline {
 
     @Override
     public void process(ResultItems resultItems, Task task) {
-        DouYuResult douYuResult = resultItems.get("douYuResult");
-        if(douYuResult!=null){
-            douyuResultDao.saveAndFlush(douYuResult);
+        List<DouYuResult> douYuResults = resultItems.get("douYuResultList");
+        if(douYuResults!=null){
+            douyuResultDao.saveAll(douYuResults);
         }
     }
 }

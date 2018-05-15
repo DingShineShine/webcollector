@@ -2,6 +2,7 @@ package com.ding.webcollector_boot;
 
 import org.junit.Test;
 import us.codecraft.webmagic.selector.Html;
+import us.codecraft.webmagic.selector.Selectable;
 
 import java.util.Random;
 
@@ -32,5 +33,15 @@ public class TestOne {
     public void test4(){
         Html html = new Html("https://www.douyu.com/directory/game/LRSZQ");
         System.out.println(html);
+    }
+
+    @Test
+    public void test5(){
+        String s = "https://www.douyu.com/directory/game/\\w+";
+        Html html = new Html("https://www.douyu.com/directory/game/LRSZQ");
+        boolean match = html.links().regex(s).match();
+        Selectable links = html.css("body").links();
+        System.out.println(links);
+        System.out.println(match);
     }
 }
