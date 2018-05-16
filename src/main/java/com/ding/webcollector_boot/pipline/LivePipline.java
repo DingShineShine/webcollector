@@ -1,7 +1,7 @@
 package com.ding.webcollector_boot.pipline;
 
-import com.ding.webcollector_boot.dao.DouyuResultDao;
-import com.ding.webcollector_boot.domain.DouYuResult;
+import com.ding.webcollector_boot.dao.LiveResultDao;
+import com.ding.webcollector_boot.domain.LiveResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import us.codecraft.webmagic.ResultItems;
@@ -12,19 +12,19 @@ import java.util.List;
 
 /**
  * @author Ding
- * @create 2018/5/14
+ * @create 2018/5/16
  * @description :
  */
 @Component
-public class DouYuPipeline implements Pipeline {
+public class LivePipline implements Pipeline {
     @Autowired
-    private  DouyuResultDao douyuResultDao;
+    private LiveResultDao liveResultDao;
 
     @Override
     public void process(ResultItems resultItems, Task task) {
-        List<DouYuResult> douYuResults = resultItems.get("douYuResultList");
-        if(douYuResults!=null){
-            douyuResultDao.saveAll(douYuResults);
+        List<LiveResult> liveResults = resultItems.get("liveResultList");
+        if(liveResults!=null){
+            liveResultDao.saveAll(liveResults);
         }
     }
 }

@@ -8,7 +8,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>webcollector_boot</name>
+    <name>webcollectorboot</name>
     <description>Demo project for Spring Boot</description>
 
     <parent>
@@ -43,7 +43,6 @@
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
         </dependency>
-
         <!--lombok-->
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -55,7 +54,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
-
         <!--webmagic-->
         <dependency>
             <groupId>us.codecraft</groupId>
@@ -67,8 +65,12 @@
             <artifactId>webmagic-extension</artifactId>
             <version>0.7.3</version>
         </dependency>
-
-
+        <!-- schedule -->
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+            <version>2.3.0</version>
+        </dependency>
     </dependencies>
 
     <build>

@@ -8,15 +8,15 @@ import javax.persistence.*;
 
 /**
  * @author Ding
- * @create 2018/5/10
+ * @create 2018/5/16
  * @description :
  */
-@Table(name = "douyu_result")
+@Table(name = "live_crawler_result")
 @Data
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class DouYuResult {
+public class LiveResult {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,6 +25,8 @@ public class DouYuResult {
     private String player;
     @Column(name = "title")
     private String title;
+    @Column(name="liveStatus")
+    private String liveStatus;
     @Column(name = "hot")
     private String hot;
     @Column(name = "gameType")
@@ -35,5 +37,4 @@ public class DouYuResult {
     private String picUrl;
     @Column(name = "liveUrl")
     private String liveUrl;
-
 }
