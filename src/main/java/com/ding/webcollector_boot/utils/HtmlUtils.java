@@ -38,29 +38,29 @@ public class HtmlUtils {
     public static String delHTMLTag(String htmlStr) {
         if (htmlStr != null) {
             // 过滤script标签
-            Pattern p_w = Pattern.compile(REGEX_W, Pattern.CASE_INSENSITIVE);
-            Matcher m_w = p_w.matcher(htmlStr);
-            htmlStr = m_w.replaceAll("");
+            Pattern w = Pattern.compile(REGEX_W, Pattern.CASE_INSENSITIVE);
+            Matcher mw = w.matcher(htmlStr);
+            htmlStr = mw.replaceAll("");
 
             // 过滤script标签
-            Pattern p_script = Pattern.compile(REGEX_SCRIPT, Pattern.CASE_INSENSITIVE);
-            Matcher m_script = p_script.matcher(htmlStr);
-            htmlStr = m_script.replaceAll("");
+            Pattern script = Pattern.compile(REGEX_SCRIPT, Pattern.CASE_INSENSITIVE);
+            Matcher mScript = script.matcher(htmlStr);
+            htmlStr = mScript.replaceAll("");
 
             // 过滤style标签
-            Pattern p_style = Pattern.compile(REGEX_STYLE, Pattern.CASE_INSENSITIVE);
-            Matcher m_style = p_style.matcher(htmlStr);
-            htmlStr = m_style.replaceAll("");
+            Pattern style = Pattern.compile(REGEX_STYLE, Pattern.CASE_INSENSITIVE);
+            Matcher mStyle = style.matcher(htmlStr);
+            htmlStr = mStyle.replaceAll("");
 
             // 过滤html标签
-            Pattern p_html = Pattern.compile(REGEX_HTML, Pattern.CASE_INSENSITIVE);
-            Matcher m_html = p_html.matcher(htmlStr);
-            htmlStr = m_html.replaceAll("-");
+            Pattern html = Pattern.compile(REGEX_HTML, Pattern.CASE_INSENSITIVE);
+            Matcher mHtml = html.matcher(htmlStr);
+            htmlStr = mHtml.replaceAll("-");
 
             // 过滤空格回车标签
-            Pattern p_space = Pattern.compile(REGEX_SPACE, Pattern.CASE_INSENSITIVE);
-            Matcher m_space = p_space.matcher(htmlStr);
-            htmlStr = m_space.replaceAll("");
+            Pattern space = Pattern.compile(REGEX_SPACE, Pattern.CASE_INSENSITIVE);
+            Matcher mSpace = space.matcher(htmlStr);
+            htmlStr = mSpace.replaceAll("");
             return htmlStr.trim();
         } else {
             return "";
