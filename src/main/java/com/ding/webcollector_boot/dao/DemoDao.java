@@ -4,14 +4,11 @@ import com.ding.webcollector_boot.domain.LiveResult;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 /**
  * @author Ding
  * @create 2018/5/16
- * @description :直播数据通用数据层
+ * @description :
  */
 @Repository
-public interface LiveResultDao extends JpaRepository<LiveResult,Integer> {
-    List<LiveResult> findByHot(String hot);
+public interface DemoDao extends JpaRepository<LiveResult,Integer> {
 }
