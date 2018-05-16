@@ -52,7 +52,7 @@ public class XiongMaoMagic implements PageProcessor {
                         String gameType = page.getHtml().css(cssGameType, "text").toString();
                         String player = page.getHtml().css(cssPlayer, "text").toString();
                         String title = page.getHtml().css(cssTitle, "text").get();
-                        String liveUrl = url.substring(0, url.lastIndexOf(".tv/") + 4) + page.getHtml().css(cssLiveUrl, "href").get();
+                        String liveUrl = url.substring(0, url.lastIndexOf(".tv/") + 3) + page.getHtml().css(cssLiveUrl, "href").get();
                         if (gameType != null && player != null && title != null) {
                             String hot = page.getHtml().css(cssHot, "text").get();
                             String keyWord = page.getHtml().css(cssKeyWord).toString();

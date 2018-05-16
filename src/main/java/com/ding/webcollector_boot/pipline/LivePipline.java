@@ -22,7 +22,7 @@ public class LivePipline implements Pipeline {
 
     @Override
     public void process(ResultItems resultItems, Task task) {
-        List<LiveResult> liveResults = resultItems.get("liveResultList");
+        List<LiveResult> liveResults = resultItems.get("liveResults");
         if(liveResults!=null){
             liveResultDao.saveAll(liveResults);
         }

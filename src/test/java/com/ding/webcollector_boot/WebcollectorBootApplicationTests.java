@@ -1,6 +1,5 @@
 package com.ding.webcollector_boot;
 
-import com.ding.webcollector_boot.dao.DemoDao;
 import com.ding.webcollector_boot.dao.LiveResultDao;
 import com.ding.webcollector_boot.domain.LiveResult;
 import org.junit.Test;
@@ -16,14 +15,11 @@ import java.util.List;
 public class WebcollectorBootApplicationTests {
     @Autowired
     private LiveResultDao liveResultDao;
-    @Autowired
-    private DemoDao demoDao;
     @Test
     public void contextLoads() {
         LiveResult liveResult = null;
         try {
             liveResult = new LiveResult(null, "2", "1", "1", "4", "1", "1", "1", "1");
-            demoDao.save(liveResult);
         }catch (Exception e){
             e.printStackTrace();
         }finally {
