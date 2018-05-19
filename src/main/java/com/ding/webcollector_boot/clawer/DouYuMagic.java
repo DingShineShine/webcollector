@@ -76,7 +76,7 @@ public class DouYuMagic implements PageProcessor {
                 .setUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:59.0) Gecko/20100101 Firefox/59.0")
                 .setSleepTime(3000).setRetryTimes(3).setRetrySleepTime(1000).setCharset("utf-8");
     }
-
+//    http://139.199.89.239:1008/88414687-3b91-4286-89ba-2dc813b107ce
 
     public void run() {
         try {

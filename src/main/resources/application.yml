@@ -1,12 +1,44 @@
 spring:
   datasource:
-    username: root
-    password: root
-    driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/crawler
+    druid:
+      password: root
+      url: jdbc:mysql://localhost:3306/crawler
+      username: root
+      driver-class-name: com.mysql.jdbc.Driver
+      min-idle: 5
+      max-active: 50
+      filter:
+        slf4j:
+          enabled: true
   jpa:
     show-sql: true
     hibernate:
       ddl-auto: update
-spring.jpa.properties.hibernate.format_sql: false
+  thymeleaf:
+    cache: false
+server:
+  servlet:
+    path: /ding
+
+#spring.jpa.properties.hibernate.format_sql: false
+#    # 初始化大小，最小，最大
+#    spring.datasource.initialSize: 5
+#    spring.datasource.minIdle: 5
+#    spring.datasource.maxActive=20
+#    # 配置获取连接等待超时的时间
+#    spring.datasource.maxWait=60000
+#    # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+#    spring.datasource.timeBetweenEvictionRunsMillis=60000
+#    # 配置一个连接在池中最小生存的时间，单位是毫秒
+#    spring.datasource.minEvictableIdleTimeMillis=300000
+#    spring.datasource.validationQuery=SELECT 1 FROM DUAL
+#    spring.datasource.testWhileIdle=true
+#    spring.datasource.testOnBorrow=false
+#    spring.datasource.testOnReturn=false
+#    # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+#    spring.datasource.filters=stat,wall,log4j
+#    # 通过connectProperties属性来打开mergeSql功能（参数不同的sql合并统计）、慢SQL记录（执行时间长的sql）
+#    spring.datasource.connectionProperties=druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+    # 合并多个DruidDataSource的监控数据
+    #spring.datasource.useGlobalDataSourceStat=true
 

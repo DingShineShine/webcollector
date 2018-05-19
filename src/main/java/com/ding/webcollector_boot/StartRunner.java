@@ -21,7 +21,7 @@ public class StartRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        douYuMagic.run();
-        xiongMaoMagic.run();
+//        douYuMagic.run();
+//        xiongMaoMagic.run();
     }
 }
