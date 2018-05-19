@@ -10,6 +10,7 @@ import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.processor.PageProcessor;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,9 +56,15 @@ public class XiongMaoMagic implements PageProcessor {
                         String liveUrl = url.substring(0, url.lastIndexOf(".tv/") + 3) + page.getHtml().css(cssLiveUrl, "href").get();
                         if (gameType != null && player != null && title != null) {
                             String hot = page.getHtml().css(cssHot, "text").get();
+                            int number = 0;
+                            if(null != hot && hot.endsWith("万")){
+                                number = Integer.parseInt(hot.substring(0, hot.length() - 1) + "0000");
+                            }else if(hot!=null){
+                                number = Integer.parseInt(hot);
+                            }
                             String keyWord = page.getHtml().css(cssKeyWord).toString();
                             String picUrl = page.getHtml().css(cssPicUrl, "data-original").get();
-                            LiveResult liveResult = new LiveResult(null, player, title, "1", hot, gameType, HtmlUtils.delHTMLTag(keyWord), picUrl, liveUrl);
+                            LiveResult liveResult = new LiveResult(null, player, title, "1", number, gameType, HtmlUtils.delHTMLTag(keyWord), picUrl, liveUrl,LocalDateTime.now());
                             liveResults.add(liveResult);
                         }
                     }
@@ -74,7 +81,7 @@ public class XiongMaoMagic implements PageProcessor {
     public Site getSite() {
         return Site.me().setDomain(MAIN_PAGE)
                 .setUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:59.0) Gecko/20100101 Firefox/59.0")
-                .setSleepTime(3000).setRetryTimes(3).setRetrySleepTime(1000).setCharset("utf-8");
+                .setSleepTime(3000).setRetryTimes(3).setRetrySleepTime(1000).setCharset("utf-8").setRetryTimes(3);
     }
 
     public void run() {

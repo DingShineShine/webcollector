@@ -11,6 +11,7 @@ import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.processor.PageProcessor;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,10 +56,16 @@ public class DouYuMagic implements PageProcessor {
                         String title = page.getHtml().css(cssTitle, "text").get();
                         String liveUrl = url.substring(0, url.lastIndexOf(".com/") + 5) + page.getHtml().css(cssLiveUrl, "data-rid").get();
                         if (gameType != null && player != null && title != null) {
+                            int number = 0;
                             String hot = page.getHtml().css(cssHot, "text").get();
+                            if(null != hot && hot.endsWith("万")){
+                                 number = Integer.parseInt(hot.substring(0, hot.length() - 1) + "0000");
+                            }else if(hot!=null){
+                                 number = Integer.parseInt(hot);
+                            }
                             String keyWord = page.getHtml().css(cssKeyWord).toString();
                             String picUrl = page.getHtml().css(cssPicUrl, "data-original").get();
-                            LiveResult douYuResult = new LiveResult(null, player, title, "1", hot, gameType, HtmlUtils.delHTMLTag(keyWord), picUrl, liveUrl);
+                            LiveResult douYuResult = new LiveResult(null, player, title, "1", number, gameType, HtmlUtils.delHTMLTag(keyWord), picUrl, liveUrl,LocalDateTime.now());
                             liveResults.add(douYuResult);
                         }
                     }
@@ -74,7 +81,7 @@ public class DouYuMagic implements PageProcessor {
     public Site getSite() {
         return Site.me().setDomain(MAIN_PAGE)
                 .setUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:59.0) Gecko/20100101 Firefox/59.0")
-                .setSleepTime(3000).setRetryTimes(3).setRetrySleepTime(1000).setCharset("utf-8");
+                .setSleepTime(3000).setRetryTimes(3).setRetrySleepTime(1000).setCharset("utf-8").setRetryTimes(3);
     }
 //    http://139.199.89.239:1008/88414687-3b91-4286-89ba-2dc813b107ce
 

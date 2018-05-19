@@ -9,7 +9,10 @@ import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-
+/**
+ * 连接池配置,可通过localhost:8080/druid 直接访问
+ * 账号密码在代码里
+ */
 @Configuration
 public class DruidConfig {
 
@@ -26,7 +29,7 @@ public class DruidConfig {
         /** 黑名单，与白名单存在相同IP时，优先于白名单 */
 //        servletRegistrationBean.addInitParameter("deny","192.0.0.1");
         /** 用户名 */
-        servletRegistrationBean.addInitParameter("loginUsername", "dgh");
+        servletRegistrationBean.addInitParameter("loginUsername", "ding");
         /** 密码 */
         servletRegistrationBean.addInitParameter("loginPassword", "asdwsx");
         /** 禁用页面上的“Reset All”功能 */

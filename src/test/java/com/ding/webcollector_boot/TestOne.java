@@ -4,6 +4,8 @@ import org.junit.Test;
 import us.codecraft.webmagic.selector.Html;
 import us.codecraft.webmagic.selector.Selectable;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.Random;
 
 /**
@@ -46,11 +48,35 @@ public class TestOne {
     }
 
     @Test
+    public void test49(){
+        try {
+            System.out.println(LocalDateTime.now());
+            LocalDateTime now = LocalDateTime.now();
+            Thread.sleep(6000);
+            LocalDateTime now1 = LocalDateTime.now();
+            long l = Duration.between(now, now1).toMinutes();
+            System.out.println(l);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @Test
     public void test6(){
         String s = "https://www.douyu.com/directory/game/\\w+";
         int i = s.lastIndexOf(".com/")+5;
 
         String substring = s.substring(0, i);
         System.out.println(substring);
+    }
+
+    @Test
+    public void test75(){
+        int number = 0;
+        String hot = "1.1万";
+        if(null != hot && hot.endsWith("万")){
+            number = Integer.parseInt(hot.substring(0, hot.length() - 1) + "0000");
+        }
     }
 }

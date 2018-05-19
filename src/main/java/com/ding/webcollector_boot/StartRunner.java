@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 /**
  * @author Ding
  * @create 2018/5/14
- * @description :
+ * @description : 测试使用,启动项目则启动爬虫
  */
 @Component
 public class StartRunner implements CommandLineRunner {

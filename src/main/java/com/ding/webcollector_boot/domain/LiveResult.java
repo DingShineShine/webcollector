@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 /**
  * @author Ding
@@ -28,7 +29,7 @@ public class LiveResult {
     @Column(name="liveStatus")
     private String liveStatus;
     @Column(name = "hot")
-    private String hot;
+    private Integer hot;
     @Column(name = "gameType")
     private String gameType;
     @Column(name = "keyWord")
@@ -37,4 +38,6 @@ public class LiveResult {
     private String picUrl;
     @Column(name = "liveUrl")
     private String liveUrl;
+    @Column(name = "lastUpdate")
+    private LocalDateTime updateTime;
 }

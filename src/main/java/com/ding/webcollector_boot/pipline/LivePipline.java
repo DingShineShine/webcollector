@@ -24,7 +24,9 @@ public class LivePipline implements Pipeline {
     public void process(ResultItems resultItems, Task task) {
         List<LiveResult> liveResults = resultItems.get("liveResults");
         if(liveResults!=null){
-            liveResultDao.saveAll(liveResults);
+            for (LiveResult liveResult : liveResults) {
+                liveResultDao.save(liveResult);
+            }
         }
     }
 }

@@ -22,15 +22,15 @@ public class LiveCrawlerShedule {
     @Autowired
     private XiongMaoMagic xiongMaoMagic;
 
-    @Scheduled(cron = "40 40 * * * ?")
+    @Scheduled(cron = "* 0/3 * * * ?")
     public void crawlerRun(){
-        log.info("定时任务执行开始:{}",LocalDateTime.now());
+        log.info("爬虫定时任务执行开始:{}",LocalDateTime.now());
         try {
             douYuMagic.run();
             xiongMaoMagic.run();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        log.info("定时任务执行结束{}",LocalDateTime.now());
+        log.info("爬虫定时任务执行结束{}",LocalDateTime.now());
     }
 }

@@ -16,9 +16,6 @@ spring:
       ddl-auto: update
   thymeleaf:
     cache: false
-server:
-  servlet:
-    path: /ding
 
 #spring.jpa.properties.hibernate.format_sql: false
 #    # 初始化大小，最小，最大
