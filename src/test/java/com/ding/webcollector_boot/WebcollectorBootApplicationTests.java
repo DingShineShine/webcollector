@@ -16,18 +16,7 @@ import java.util.List;
 public class WebcollectorBootApplicationTests {
     @Autowired
     private LiveResultDao liveResultDao;
-    @Test
-    public void contextLoads() {
-        LiveResult liveResult = null;
-        try {
-            liveResult = new LiveResult(null, "2", "1", "1", 4, "1", "1", "1", "1",LocalDateTime.now());
-        }catch (Exception e){
-            e.printStackTrace();
-        }finally {
-//            List<LiveResult> byHot = liveResultDao.findByHot(liveResult.getHot());
-//            System.out.println("======================================" + byHot);
-        }
-    }
+
 
     @Test
     public void test33(){

@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
 import java.time.LocalDateTime;
 
 /**
@@ -16,7 +18,7 @@ import java.time.LocalDateTime;
  */
 @Component
 @Slf4j
-public class LiveCrawlerShedule {
+public class LiveCrawlerShedule  implements ServletContextListener {
     @Autowired
     private DouYuMagic douYuMagic;
     @Autowired
@@ -32,5 +34,20 @@ public class LiveCrawlerShedule {
             e.printStackTrace();
         }
         log.info("爬虫定时任务执行结束{}",LocalDateTime.now());
+    }
+
+    /**
+     * 项目启动则执行一次
+     * @param servletContextEvent
+     */
+    @Override
+    public void contextInitialized(ServletContextEvent servletContextEvent) {
+        log.info("项目启动执行爬虫任务,当前时间为{}",LocalDateTime.now());
+        this.crawlerRun();
+    }
+
+    @Override
+    public void contextDestroyed(ServletContextEvent servletContextEvent) {
+
     }
 }

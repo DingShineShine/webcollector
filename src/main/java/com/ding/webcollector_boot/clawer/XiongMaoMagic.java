@@ -56,15 +56,18 @@ public class XiongMaoMagic implements PageProcessor {
                         String liveUrl = url.substring(0, url.lastIndexOf(".tv/") + 3) + page.getHtml().css(cssLiveUrl, "href").get();
                         if (gameType != null && player != null && title != null) {
                             String hot = page.getHtml().css(cssHot, "text").get();
-                            int number = 0;
+                            if(hot!=null && !hot.endsWith("万") && Integer.parseInt(hot) == 0){
+                                page.setSkip(true);
+                            }
+                            double number = 0;
                             if(null != hot && hot.endsWith("万")){
-                                number = Integer.parseInt(hot.substring(0, hot.length() - 1) + "0000");
+                                number = Double.parseDouble(hot.substring(0, hot.length() - 1))* 10000;
                             }else if(hot!=null){
-                                number = Integer.parseInt(hot);
+                                number = Double.parseDouble(hot);
                             }
                             String keyWord = page.getHtml().css(cssKeyWord).toString();
                             String picUrl = page.getHtml().css(cssPicUrl, "data-original").get();
-                            LiveResult liveResult = new LiveResult(null, player, title, "1", number, gameType, HtmlUtils.delHTMLTag(keyWord), picUrl, liveUrl,LocalDateTime.now());
+                            LiveResult liveResult = new LiveResult(player, title, "1", number, gameType, HtmlUtils.delHTMLTag(keyWord), picUrl, liveUrl,LocalDateTime.now(),hot);
                             liveResults.add(liveResult);
                         }
                     }

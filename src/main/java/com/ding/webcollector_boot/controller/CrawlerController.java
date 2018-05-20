@@ -5,10 +5,11 @@ import com.ding.webcollector_boot.domain.LiveResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -23,22 +24,28 @@ public class CrawlerController {
     @Autowired
     private LiveResultDao liveResultDao;
 
-    @GetMapping(path = "/{gameType}")
-    public ResponseEntity<List<LiveResult>> lookFor(@PathVariable(value = "gameType")String gameType){
-
-        return null;
-    }
-
     @GetMapping
     public String testskip(){
-        return "test";
+        return "index";
     }
 
-    @GetMapping(path = "game/{gameType}")
-    @ResponseBody
-    public List<LiveResult> getGameType(@PathVariable(value = "gameType")String gameType){
+    @GetMapping("/game")
+    public String testdemo(Model model){
+        String defultGameType = "英雄联盟";
+        List<String> gameTypeList = liveResultDao.findGameTypeList(50);
+        List<LiveResult> liveResults = liveResultDao.findAllByGameType(defultGameType);
+        model.addAttribute("gameTypeList",gameTypeList);
+        model.addAttribute("gameDetails",liveResults);
+        return "index";
+    }
+    @GetMapping("/game/{gameType}")
+    public ModelAndView listGameDetails(@PathVariable(value = "gameType")String gameType){
+        ModelAndView index2 = new ModelAndView("index");
+        List<String> gameTypeList = liveResultDao.findGameTypeList(50);
         List<LiveResult> liveResults = liveResultDao.findAllByGameType(gameType);
-        return liveResults;
+        index2.addObject("gameTypeList",gameTypeList);
+        index2.addObject("gameDetails",liveResults);
+        return index2;
     }
 
     @GetMapping(path = "game/{gameType}/{hot}")
@@ -51,10 +58,7 @@ public class CrawlerController {
     @GetMapping(path = "gametype/list")
     @ResponseBody
     public List<String> listGameType(){
-        List<String> gameTypeList = liveResultDao.findGameTypeList(30);
+        List<String> gameTypeList = liveResultDao.findGameTypeList(50);
         return gameTypeList;
     }
-
-
-
 }

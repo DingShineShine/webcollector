@@ -56,16 +56,19 @@ public class DouYuMagic implements PageProcessor {
                         String title = page.getHtml().css(cssTitle, "text").get();
                         String liveUrl = url.substring(0, url.lastIndexOf(".com/") + 5) + page.getHtml().css(cssLiveUrl, "data-rid").get();
                         if (gameType != null && player != null && title != null) {
-                            int number = 0;
                             String hot = page.getHtml().css(cssHot, "text").get();
+                            if(hot!=null && !hot.endsWith("万") && Integer.parseInt(hot) == 0){
+                                page.setSkip(true);
+                            }
+                            double number = 0;
                             if(null != hot && hot.endsWith("万")){
-                                 number = Integer.parseInt(hot.substring(0, hot.length() - 1) + "0000");
+                                number = Double.parseDouble(hot.substring(0, hot.length() - 1))* 10000;
                             }else if(hot!=null){
-                                 number = Integer.parseInt(hot);
+                                number = Double.parseDouble(hot);
                             }
                             String keyWord = page.getHtml().css(cssKeyWord).toString();
                             String picUrl = page.getHtml().css(cssPicUrl, "data-original").get();
-                            LiveResult douYuResult = new LiveResult(null, player, title, "1", number, gameType, HtmlUtils.delHTMLTag(keyWord), picUrl, liveUrl,LocalDateTime.now());
+                            LiveResult douYuResult = new LiveResult(player, title, "1", number, gameType, HtmlUtils.delHTMLTag(keyWord), picUrl, liveUrl,LocalDateTime.now(),hot);
                             liveResults.add(douYuResult);
                         }
                     }

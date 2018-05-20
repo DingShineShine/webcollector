@@ -73,10 +73,11 @@ public class TestOne {
 
     @Test
     public void test75(){
-        int number = 0;
+        Double number = 0.0;
         String hot = "1.1万";
         if(null != hot && hot.endsWith("万")){
-            number = Integer.parseInt(hot.substring(0, hot.length() - 1) + "0000");
+            number = Double.parseDouble(hot.substring(0, hot.length() - 1) )*10000;
         }
+        System.out.println(number);
     }
 }

@@ -29,7 +29,7 @@ public interface LiveResultDao extends JpaRepository<LiveResult,Integer> {
      * @param gameType
      * @return
      */
-    @Query("select live from LiveResult live where live.gameType like :gameType order by live.hot desc")
+    @Query("select live from LiveResult live where live.gameType like :gameType and live.picUrl is not null order by live.hot desc")
     List<LiveResult> findAllByGameType(@Param("gameType") String gameType);
 
     /**

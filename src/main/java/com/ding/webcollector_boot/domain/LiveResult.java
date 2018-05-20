@@ -18,10 +18,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class LiveResult {
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
     @Column(name = "player")
     private String player;
     @Column(name = "title")
@@ -29,15 +25,18 @@ public class LiveResult {
     @Column(name="liveStatus")
     private String liveStatus;
     @Column(name = "hot")
-    private Integer hot;
+    private Double hot;
     @Column(name = "gameType")
     private String gameType;
     @Column(name = "keyWord")
     private String keyWord;
     @Column(name = "picUrl")
     private String picUrl;
+    @Id
     @Column(name = "liveUrl")
     private String liveUrl;
     @Column(name = "lastUpdate")
     private LocalDateTime updateTime;
+    @Column(name = "numberStr")
+    private String numberStr;
 }

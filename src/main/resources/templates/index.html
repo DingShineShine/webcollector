@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Darling</title>
+</head>
+<body>
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <ul class="breadcrumb">
+                <li>
+                    <a href="#">Hello, world</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="row clearfix">
+        <div class="col-md-3 column">
+            <ul class="list-unstyled">
+                <li th:each="gameType : ${gameTypeList}">
+                    <a th:href="@{'/game/'+${gameType}}">
+                        <span class="sidebar-mini" th:text="${gameType}"></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-9 column">
+            <div class="row" >
+                <div class="col-md-4" th:each="gameDetail : ${gameDetails}">
+                    <a th:href="@{${gameDetail.getLiveUrl()}}">
+                        <div>
+                            <img th:src="${gameDetail.getPicUrl()}" style="display: block" width="283" height="163">
+                        </div>
+                        <div>
+                            <div>
+                                <h3 th:text="${gameDetail.getTitle()}"></h3><span th:text="${gameDetail.getGameType()}"></span>
+                            </div>
+                            <p>
+                                <span th:text="${gameDetail.getPlayer()}"></span>
+                                <span th:text="'人数: '+ ${gameDetail.getNumberStr()}">Hot</span>
+                            </p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
