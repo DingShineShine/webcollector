@@ -4,6 +4,7 @@ import org.junit.Test;
 import us.codecraft.webmagic.selector.Html;
 import us.codecraft.webmagic.selector.Selectable;
 
+import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Random;
@@ -80,4 +81,32 @@ public class TestOne {
         }
         System.out.println(number);
     }
+
+    @Test
+    public void test86(){
+        Random random = new Random();
+        for (int i = 0; i < 10; i++) {
+            System.out.println(random.nextInt(100));
+
+        }
+    }
+
+    @Test
+    public void test94(){
+        BigDecimal iniMoney = new BigDecimal("0.1");
+        BigDecimal sumMoney = new BigDecimal("1");
+        int count = 0;
+        for(BigDecimal p = iniMoney; sumMoney.compareTo(p)>=0; p=p.add(iniMoney)){
+            sumMoney = sumMoney.subtract(p);
+            count++;
+            System.out.println("remainingMoney:"+sumMoney);
+        }
+        System.out.println(count);
+    }
+
+    @Test
+    public void test108(){
+
+    }
+
 }
