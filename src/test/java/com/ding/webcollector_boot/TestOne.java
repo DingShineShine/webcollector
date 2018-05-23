@@ -5,7 +5,9 @@ import us.codecraft.webmagic.selector.Html;
 import us.codecraft.webmagic.selector.Selectable;
 
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Random;
 
 /**
@@ -80,4 +82,16 @@ public class TestOne {
         }
         System.out.println(number);
     }
+
+    @Test
+    public void test85(){
+        LocalDate endDay = LocalDate.parse("2018-06-17");
+        LocalDate startDay = LocalDate.parse("2018-05-18");
+        long chuChaiTianShu =  ChronoUnit.DAYS.between(startDay, endDay);
+        System.out.println(chuChaiTianShu+"");
+
+    }
+
+
+
 }

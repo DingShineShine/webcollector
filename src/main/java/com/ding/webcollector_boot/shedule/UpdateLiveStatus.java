@@ -35,6 +35,7 @@ public class UpdateLiveStatus {
             if(Duration.between(liveResult.getUpdateTime(),LocalDateTime.now()).toMinutes()>4){
                 log.info("{}已经下播,下播时间为{}",liveResult.getPlayer(),LocalDateTime.now());
                 liveResult.setLiveStatus("0");
+                liveResultDao.save(liveResult);
             }
         }
         log.info("定时更新直播状态结束,结束时间为{}",LocalDateTime.now());
