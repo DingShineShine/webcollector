@@ -4,6 +4,7 @@ import com.ding.webcollector_boot.domain.LiveResult;
 import com.ding.webcollector_boot.pipline.LivePipline;
 import com.ding.webcollector_boot.utils.HtmlUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import us.codecraft.webmagic.Page;
@@ -57,7 +58,7 @@ public class DouYuMagic implements PageProcessor {
                         String liveUrl = url.substring(0, url.lastIndexOf(".com/") + 5) + page.getHtml().css(cssLiveUrl, "data-rid").get();
                         if (gameType != null && player != null && title != null) {
                             String hot = page.getHtml().css(cssHot, "text").get();
-                            if(hot!=null && !hot.endsWith("万") && Integer.parseInt(hot) == 0){
+                            if(StringUtils.isNotBlank(hot) && !hot.endsWith("万") && Integer.parseInt(hot) == 0){
                                 page.setSkip(true);
                             }
                             double number = 0;
