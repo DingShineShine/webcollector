@@ -108,7 +108,14 @@ public class TestOne {
 
     @Test
     public void test108(){
-
+        double sumMoney = 1.0;
+        int count = 0;
+        double b = 0.1;
+        for(double price = b ; sumMoney-price>0;price+=b){
+            sumMoney-=price;
+            count++;
+        }
+        System.out.println(count);
     }
     public void test85(){
         LocalDate endDay = LocalDate.parse("2018-06-17");
