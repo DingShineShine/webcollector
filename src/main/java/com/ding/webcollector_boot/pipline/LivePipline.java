@@ -25,6 +25,7 @@ public class LivePipline implements Pipeline {
         List<LiveResult> liveResults = resultItems.get("liveResults");
         if(liveResults!=null){
             for (LiveResult liveResult : liveResults) {
+                liveResult.setLiveStatus("1");
                 liveResultDao.save(liveResult);
             }
         }
