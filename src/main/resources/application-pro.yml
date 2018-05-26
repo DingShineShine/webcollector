@@ -1,7 +1,7 @@
 spring:
   datasource:
     druid:
-      url: jdbc:mysql://localhost:3306/crawler
+      url: jdbc:mysql://120.79.39.224:3306/crawler
       username: root
       password: 1992!Ding
       driver-class-name: com.mysql.jdbc.Driver
