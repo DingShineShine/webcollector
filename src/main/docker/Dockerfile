@@ -1,3 +1,3 @@
-FROM registry.huilianyi.com/helios/helios-base-image
-ENV PROJECT_NAME fosun
+FROM registry.cn-hangzhou.aliyuncs.com/wowealth/jdk1.8
+ENV PROJECT_NAME pro
 
