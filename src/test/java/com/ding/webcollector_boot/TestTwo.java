@@ -1,6 +1,7 @@
 package com.ding.webcollector_boot;
 
 /**
+<<<<<<< HEAD
  * @author ding
  * @Description
  * @date 2018/05/30-20:49
