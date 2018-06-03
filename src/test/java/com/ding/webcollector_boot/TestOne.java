@@ -1,5 +1,6 @@
 package com.ding.webcollector_boot;
 
+import com.ding.webcollector_boot.fastjson.Student;
 import org.junit.Test;
 import us.codecraft.webmagic.selector.Html;
 import us.codecraft.webmagic.selector.Selectable;
@@ -9,6 +10,9 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -124,5 +128,59 @@ public class TestOne {
         System.out.println(chuChaiTianShu+"");
     }
 
+    @Test
+    public void test128(){
+        List<Student> students = new ArrayList<>();
+        if(students!=null){
+            for (Student student : students) {
+                System.out.println(student.getStudentAge());
+            }
+        }
+
+    }
+
+    @Test
+    public void test142(){
+        String flowStatus = "3";
+        String backlogTitle= "";
+        switch (flowStatus){
+            case "2" :
+                backlogTitle="抄送";
+                break;
+            case "3" :
+            case "8" :
+                backlogTitle = "转发";
+                break;
+            case "4" :
+                backlogTitle = "还款";
+                break;
+        }
+        System.out.println(backlogTitle);
+    }
+
+    @Test
+    public void test161(){
+        List<String> a = new ArrayList<>();
+        a.add("hong");
+        a.add("ming");
+        a.add("fang");
+        Iterator<String> iterator = a.iterator();
+        StringBuilder s = new StringBuilder();
+        //1 .
+        while (iterator.hasNext()){
+            s.append(iterator.next()).append(";");
+        }
+        System.out.println(s);
+        // 2.
+        String aStr = a.toString();
+        String ss = aStr.substring(1, aStr.length() - 1).replaceAll(", ", ";");
+        System.out.println(ss);
+    }
+
+    @Test
+    public void test181(){
+        String[] strs = {"hong", "ming", "fang"};
+
+    }
 
 }
