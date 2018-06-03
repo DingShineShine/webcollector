@@ -9,7 +9,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
 @ComponentScan
-@EnableScheduling
+//@EnableScheduling
 @EnableAspectJAutoProxy
 public class WebcollectorBootApplication {
     public static void main(String[] args) {
