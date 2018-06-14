@@ -18,7 +18,7 @@ import java.util.List;
  * @Description
  * @date 2018/05/19-19:18
  */
-@Component
+//@Component
 @Slf4j
 public class UpdateLiveStatus {
     @Autowired

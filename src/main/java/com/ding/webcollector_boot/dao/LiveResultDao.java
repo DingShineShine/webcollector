@@ -58,4 +58,6 @@ public interface LiveResultDao extends JpaRepository<LiveResult,Integer> {
     @Query(value = "select t.game_type from (select count(1) as number,game_type from live_crawler_result GROUP BY game_type ORDER BY number desc limit :number) as t;",nativeQuery = true)
     List<String> findGameTypeList(@Param("number") Integer number);
 
+    LiveResult findByLiveUrl(String liveUrl);
+
 }

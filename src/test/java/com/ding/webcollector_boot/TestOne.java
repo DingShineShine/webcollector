@@ -1,25 +1,31 @@
 package com.ding.webcollector_boot;
 
 import com.ding.webcollector_boot.fastjson.Student;
+import com.ding.webcollector_boot.service.impl.Cat;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
+import org.quartz.CronExpression;
+import org.springframework.beans.BeanUtils;
 import us.codecraft.webmagic.selector.Html;
 import us.codecraft.webmagic.selector.Selectable;
 
 import java.math.BigDecimal;
-import java.time.Duration;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
+import java.text.ParseException;
+import java.time.*;
+import java.util.*;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 /**
  * @author ding
  * @Description
  * @date 2018/05/13-11:25
  */
+@Slf4j
 public class TestOne {
     @Test
     public void testone() {
@@ -192,7 +198,95 @@ public class TestOne {
     }
 
     @Test
-    public void test181() {
-        String[] strs = {"hong", "ming", "fang"};
+    public void test224() throws ParseException {
+        int i = 0;
+        int pushCount = 3;
+        String cronExpression = "0 0 8 1/3 * ?";
+        Date startPushtTime = Date.from(ZonedDateTime.now(ZoneId.systemDefault()).toInstant());
+        List<Date> dates = new ArrayList<>();
+        CronExpression cron = new CronExpression(cronExpression);
+        while(i < pushCount){
+            startPushtTime = cron.getNextValidTimeAfter(startPushtTime);
+            dates.add(startPushtTime);
+            i++;
+        }
+        for (Date date : dates) {
+            System.out.println(date);
+        }
     }
+
+    @Test
+    public void test244(){
+        Student student = new Student();
+        int i = 0;
+        List<Student> list = new ArrayList<>();
+        student.setStudentName("wa");
+        while (i<3){
+            Student s = new Student();
+            BeanUtils.copyProperties(student,s);
+            s.setStudentAge(i);
+            list.add(s);
+            i ++;
+        }
+        for (Student student1 : list) {
+            System.out.println(student1);
+        }
+    }
+
+
+    @Test
+    public void test264(){
+        ZonedDateTime now = ZonedDateTime.now(ZoneId.systemDefault());
+        String cronExpression = "0 0 8 1/3 * ?";
+        int count = 3;
+        List<ZonedDateTime> zonedDateTimes = TimeUtils.parseCron(cronExpression, count, now);
+        for (ZonedDateTime zonedDateTime : zonedDateTimes) {
+            System.out.println(zonedDateTime);
+        }
+    }
+
+    @Test
+    public void test243(){
+        int i = 0;
+        int pushCount = 3;
+        String cronExpression = "0 0 8 1/5 * ?";
+        ZonedDateTime startPushtTime = ZonedDateTime.now(ZoneId.systemDefault()).plusSeconds(864000);
+        List<ZonedDateTime> dates = new ArrayList<>();
+        try {
+            CronExpression cron = new CronExpression(cronExpression);
+            while(i < pushCount){
+                Date noticeStartTime = Date.from(startPushtTime.toInstant());
+                dates.add(startPushtTime);
+                startPushtTime = cron.getNextValidTimeAfter(noticeStartTime).toInstant().atZone(ZoneId.systemDefault());
+                i++;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        for (ZonedDateTime date : dates) {
+            System.out.println(date);
+        }
+    }
+
+    @Test
+    public void test266(){
+        Predicate<Student> p1 = (Student s) -> {
+            if(s.getStudentAge()>1){
+                return true;
+            }
+            return false;
+        };
+        List<Student> students = Arrays.asList(new Student("wang", 2), new Student("li", 1));
+        filterStudent(students,p1);
+
+    }
+
+    public void filterStudent(List<Student> students,Predicate<Student> p){
+        for (Student student : students) {
+            if(p.test(student)){
+                System.out.println(student.getStudentName() + "," +student.getStudentAge());
+            }
+        }
+    }
+
 }
