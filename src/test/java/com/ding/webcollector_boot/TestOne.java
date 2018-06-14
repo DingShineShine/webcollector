@@ -5,25 +5,17 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.ding.webcollector_boot.observer.CronDateUtils;
 import com.ding.webcollector_boot.observer.DateTimeUtil;
-import com.google.gson.JsonObject;
-import com.mchange.v2.c3p0.impl.NewProxyDatabaseMetaData;
 import org.apache.commons.lang3.StringUtils;
-import org.assertj.core.util.DateUtil;
 import org.junit.Test;
 import org.quartz.CronExpression;
-import org.springframework.beans.BeanUtils;
-import org.springframework.util.StopWatch;
 import us.codecraft.webmagic.selector.Html;
 import us.codecraft.webmagic.selector.Selectable;
 
-import javax.swing.text.DateFormatter;
 import java.math.BigDecimal;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
-import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 /**
@@ -153,20 +145,7 @@ public class TestOne {
         }
     }
 
-    @Test
-    public void test149() {
-        StopWatch ha = new StopWatch("ha");
-        ha.start("123");
-        BigDecimal bigDecimal = new BigDecimal("-13.1");
-        System.out.println(bigDecimal.abs());
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        ha.stop();
-        System.out.println(ha.shortSummary());
-    }
+
 
     @Test
     public void test165() {
@@ -308,4 +287,27 @@ public class TestOne {
         return c;
     }
 
+    @Test
+    public void test161(){
+        List<String> a = new ArrayList<>();
+        a.add("hong");
+        a.add("ming");
+        a.add("fang");
+        Iterator<String> iterator = a.iterator();
+        StringBuilder s = new StringBuilder();
+        //1 .
+        while (iterator.hasNext()){
+            s.append(iterator.next()).append(";");
+        }
+        System.out.println(s);
+        // 2.
+        String aStr = a.toString();
+        String ss = aStr.substring(1, aStr.length() - 1).replaceAll(", ", ";");
+        System.out.println(ss);
+    }
+
+    @Test
+    public void test181() {
+        String[] strs = {"hong", "ming", "fang"};
+    }
 }
