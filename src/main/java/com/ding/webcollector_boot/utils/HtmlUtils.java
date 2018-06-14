@@ -1,5 +1,6 @@
 package com.ding.webcollector_boot.utils;
 
+import java.lang.reflect.Method;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -41,7 +42,6 @@ public class HtmlUtils {
             Pattern w = Pattern.compile(REGEX_W, Pattern.CASE_INSENSITIVE);
             Matcher mw = w.matcher(htmlStr);
             htmlStr = mw.replaceAll("");
-
             // 过滤script标签
             Pattern script = Pattern.compile(REGEX_SCRIPT, Pattern.CASE_INSENSITIVE);
             Matcher mScript = script.matcher(htmlStr);
