@@ -14,6 +14,12 @@ import org.springframework.beans.BeanUtils;
 import us.codecraft.webmagic.selector.Html;
 import us.codecraft.webmagic.selector.Selectable;
 
+import java.beans.IntrospectionException;
+import java.beans.Introspector;
+import java.beans.PropertyDescriptor;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.time.*;
@@ -21,6 +27,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.*;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 /**
  * @author ding
@@ -402,5 +409,69 @@ public class TestOne {
             }
         }
     }
+
+
+    @Test
+    public void test408(){
+        ArrayList<String> s1 = new ArrayList<>();
+        s1.add("1");
+        s1.add("2");
+        s1.add("3");
+        ArrayList<String> s2 = new ArrayList<>();
+//        s1.add("4");
+//        s2.add("5");
+//        s2.add("1");
+        s2.add("1");
+        s2.add("2");
+        s2.add("3");
+        boolean b = s1.retainAll(s2);
+        System.out.println(b);
+        System.out.println(s1);
+    }
+
+    @Test
+    public void test426() {
+        Student s = new Student("wang", 1);
+        ArrayList arrayList = new ArrayList();
+        arrayList.add("studentName");
+        try {
+            Map<String, Object> map = this.transBean2Map(arrayList, s);
+            System.out.println(map);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private Map<String,Object> transBean2Map(List params,Student s) throws Exception {
+        return  Arrays.stream(Introspector.getBeanInfo(s.getClass()).getPropertyDescriptors()).collect(
+                Collectors.partitioningBy(p -> params.contains(p.getName()))).get(true).stream().collect(
+                Collectors.toMap(PropertyDescriptor::getName, x -> {
+                    try {
+                        return x.getReadMethod().invoke(s);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        return null;
+                    }
+                }));
+    }
+
+    @Test
+    public void test459(){
+		Student student = new Student("12", 1);
+		Student student1 = new Student("13", 1);
+		ArrayList<Student> students = new ArrayList<>();
+		students.add(student);
+		students.add(student1);
+		String s = JSON.toJSON(students).toString();
+//		System.out.println(s);
+		List<Student> students1 = JSON.parseArray(s, Student.class);
+		System.out.println(students1);
+
+		/*String s = JSONObject.toJSONString(student);
+		System.out.println(s);
+		Student student1 = JSON.parseObject(s, Student.class);
+		System.out.println(student1);*/
+	}
+
 
 }
