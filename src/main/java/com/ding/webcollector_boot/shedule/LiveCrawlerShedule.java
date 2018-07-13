@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
  * @Description
  * @date 2018/05/16-21:12
  */
-//@Component
+@Component
 @Slf4j
 public class LiveCrawlerShedule  implements ServletContextListener {
     @Autowired
